@@ -1,3 +1,3 @@
 ### What's New
 
-* Updated Dark Matter.
+* Fixed startup crash and default linkers in 1.21.
