@@ -1,13 +1,10 @@
-import com.github.spotbugs.snom.SpotBugsTask
-import me.modmuss50.mpp.ReleaseType
-
 plugins {
-    alias libs.plugins.fabric.loom
+    id 'fabric-loom' version '1.9-SNAPSHOT'
     id 'maven-publish'
-    alias libs.plugins.lombok
-    alias libs.plugins.spotbugs.base
-    alias libs.plugins.spotless
-    alias libs.plugins.modmuss50.publish
+    id 'io.freefair.lombok' version '8.6'
+    id 'com.github.spotbugs-base' version '6.0.14'
+    id 'com.diffplug.spotless' version '6.25.0'
+    id 'me.modmuss50.mod-publish-plugin' version "0.5.1"
 }
 
 def local = !System.getenv().containsKey("GITHUB_RUN_NUMBER")
