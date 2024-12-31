@@ -23,12 +23,12 @@ repositories {
 
 dependencies {
     // To change the versions see the gradle.properties file
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-    modImplementation libs.fabric.loader
+    minecraft "com.mojang:minecraft:${stonecutter.current.project}" // REMEMBER THIS
+    mappings "net.fabricmc:yarn:${property('yarn_mappings')}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${property('fabric_loader')}"
 
     // Fabric API. This is technically optional, but you probably want it anyway.
-    modImplementation libs.fabric.api
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${property('fabric_api')}"
     modImplementation include ("maven.modrinth:midnightlib:${project.midnightlib_version}")
 }
 
@@ -66,15 +66,17 @@ spotless {
 }
 
 processResources {
-    def map = [
-            "version": project.version,
-            "loader_version": libs.fabric.loader.get().version
-    ]
-    inputs.properties(map)
-    filteringCharset "UTF-8"
+    inputs.property "minecraft", stonecutter.current.version
 
-    filesMatching("fabric.mod.json") {
-        expand map
+    filesMatching("fabrid.mod.json") {
+        expand "minecraft": stonecutter.current.version
+    }
+}
+
+loom {
+    runConfigs.all {
+        ideConfigGenerated true // Run configurations are not created for subprojects by default
+        runDir "../../run" // Use a shared run folder and create separate worlds
     }
 }
 
