@@ -9,9 +9,9 @@ plugins {
     id 'me.modmuss50.mod-publish-plugin' version "0.5.1"
 }
 
-def local = !System.getenv().containsKey("GITHUB_RUN_NUMBER")
+def mcVersion = stonecutter.current.version
 
-version = "${project.mod_version}-${project.minecraft_version}-${local ? 'local' : "build.${System.getenv("GITHUB_RUN_NUMBER")}"}"
+version = "${project.mod_version}-${project.minecraft_version}-$mcVersion"
 group = project.maven_group
 
 repositories {
@@ -23,7 +23,7 @@ repositories {
 
 dependencies {
     // To change the versions see the gradle.properties file
-    minecraft "com.mojang:minecraft:${stonecutter.current.project}" // REMEMBER THIS
+    minecraft "com.mojang:minecraft:${stonecutter.current.project}"
     mappings "net.fabricmc:yarn:${property('yarn_mappings')}:v2"
     modImplementation "net.fabricmc:fabric-loader:${property('fabric_loader')}"
 
