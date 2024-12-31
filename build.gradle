@@ -29,6 +29,7 @@ dependencies {
 
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${property('fabric_api')}"
+
     modImplementation include ("maven.modrinth:midnightlib:${project.midnightlib_version}")
 }
 
@@ -66,10 +67,18 @@ spotless {
 }
 
 processResources {
-    inputs.property "minecraft", stonecutter.current.version
+    inputs.property "minecraft", mcVersion
+    inputs.property "version", mod_version
+    inputs.property "loader_version", fabric_loader
+
+    def map = [
+            "minecraft": mcVersion,
+            "version": mod_version,
+            "loader_version": fabric_loader
+    ]
 
     filesMatching("fabric.mod.json") {
-        expand "minecraft": stonecutter.current.version
+        expand map
     }
 }
 
