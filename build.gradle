@@ -68,7 +68,7 @@ spotless {
 processResources {
     inputs.property "minecraft", stonecutter.current.version
 
-    filesMatching("fabrid.mod.json") {
+    filesMatching("fabric.mod.json") {
         expand "minecraft": stonecutter.current.version
     }
 }
