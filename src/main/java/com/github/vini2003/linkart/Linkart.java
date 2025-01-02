@@ -22,7 +22,7 @@ public class Linkart implements ModInitializer {
     public static final String ID = "linkart";
     public static final Logger LOGGER = LogManager.getLogger(ID);
 
-    public static final TagKey<Item> LINKERS = TagKey.of(itemKey(), Identifier.of(ID, "linkers"));
+    public static final TagKey<Item> LINKERS = TagKey.of(itemKey(), Identifier./*? if =1.21.1 {*/of/*?}*//*? if >=1.21.4 {*//*tryParse*//*?}*/(ID, "linkers"));
 
     public void onInitialize() {
         MidnightConfig.init("linkart", LinkartConfiguration.class);
