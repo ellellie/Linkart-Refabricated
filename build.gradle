@@ -11,7 +11,7 @@ plugins {
 
 def mcVersion = stonecutter.current.version
 
-version = "${project.mod_version}-${project.minecraft_version}-$mcVersion"
+version = "${project.mod_version}-$mcVersion"
 group = project.maven_group
 
 repositories {
