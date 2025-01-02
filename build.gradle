@@ -33,6 +33,10 @@ dependencies {
     modImplementation include ("maven.modrinth:midnightlib:${project.midnightlib_version}")
 }
 
+base {
+    archivesName = "linkart-refabricated"
+}
+
 tasks.register("spotbugs", SpotBugsTask) { task ->
     sourceSets.each {
         task.sourceDirs.from(task.sourceDirs.files, it.allSource.sourceDirectories)
