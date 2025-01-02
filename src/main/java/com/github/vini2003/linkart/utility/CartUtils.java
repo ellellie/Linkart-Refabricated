@@ -29,7 +29,10 @@ public class CartUtils {
         entity.setVelocity(0, 0, 0);
 
         if (!entity.linkart$getLinkItem().isEmpty()) {
+            //? if =1.21.1
             entity.dropStack(entity.linkart$getLinkItem());
+            //? if >=1.21.4
+            /*entity.dropStack((ServerWorld) entity.getWorld(), entity.linkart$getLinkItem());*/
             spawnChainParticles(entity);
         }
 

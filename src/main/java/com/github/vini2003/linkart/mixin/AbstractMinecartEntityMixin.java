@@ -72,7 +72,10 @@ public abstract class AbstractMinecartEntityMixin extends Entity implements Link
     }
 
     // Ensure the train doesn't break apart (especially if other minecart mods increase speed)
+    //? if =1.21.1
     @ModifyArg(method = "moveOnRail", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/vehicle/AbstractMinecartEntity;move(Lnet/minecraft/entity/MovementType;Lnet/minecraft/util/math/Vec3d;)V", ordinal = 0))
+    //? if >=1.21.4
+    /*@ModifyArg(method = "move", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/vehicle/VehicleEntity;move(Lnet/minecraft/entity/MovementType;Lnet/minecraft/util/math/Vec3d;)V", ordinal = 0))*/
     private Vec3d modifiedMovement(Vec3d movement) {
         if (this.lastMovementLength < movement.length()) {
             final double targetMovementLength = movement.length();
@@ -85,6 +88,8 @@ public abstract class AbstractMinecartEntityMixin extends Entity implements Link
         return movement;
     }
 
+    // CHECK THIS AGAIN
+    //? if =1.21.1 {
     @WrapOperation(method = "moveOnRail", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/MathHelper;clamp(DDD)D"))
     private double linkart$skipVelocityClamping(double value, double min, double max, Operation<Double> original) {
         if (this.linkart$getFollowing() != null) {
@@ -97,6 +102,7 @@ public abstract class AbstractMinecartEntityMixin extends Entity implements Link
         }
         return original.call(value, min, max);
     }
+    //?}
 
     @Inject(at = @At("HEAD"), method = "tick")
     private void linkart$tick(CallbackInfo ci) {
@@ -157,7 +163,7 @@ public abstract class AbstractMinecartEntityMixin extends Entity implements Link
     private void linkart$write(NbtCompound nbt, CallbackInfo ci) {
         if (linkart$followingUUID != null) nbt.putUuid("LK-Following", linkart$followingUUID);
         if (linkart$followerUUID != null) nbt.putUuid("LK-Follower", linkart$followerUUID);
-        if (linkart$itemStack != null) nbt.put("LK-ItemStack", linkart$itemStack.encodeAllowEmpty(this.getRegistryManager()));
+        if (linkart$itemStack != null) nbt.put("LK-ItemStack", linkart$itemStack./*? if =1.21.1 {*/encodeAllowEmpty/*?}*//*? if >=1.21.4 {*//*toNbtAllowEmpty*//*?}*/(this.getRegistryManager()));
     }
 
     @Inject(at = @At("RETURN"), method = "readCustomDataFromNbt")
