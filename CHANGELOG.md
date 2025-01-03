@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Set up Stonecutter, making easier mantaining multiple versions at once.
+- Added 1.21.1 support
+  - Supported versions as of the release of 6.1.0 are: 
+    - 1.21.1
+    - Latest (1.21.4)
 
 ## [6.0.0-1.21.4] - 2024-12-14
 
