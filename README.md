@@ -7,19 +7,17 @@
 [![Connector](https://raw.githubusercontent.com/Sinytra/.github/main/badges/connector/compacter.svg)](https://modrinth.com/mod/connector)
 
 
-## The Problem:
-Minecarts are useless because they are slow and can't be linked together!
+## An updated Linkart fork for 1.21+
 
-## The Solution:
-Linkart! While Linkart doesn't solve slowness, it does solve the second issue! By using a simple chain, you can link minecarts together and have them follow each other till the end of days!
 
-[(Original page)](https://www.curseforge.com/minecraft/mc-mods/linkart-fabric)
+### Links to the original mod:
+[![Linkart Modrinth](https://img.shields.io/modrinth/dt/sc4Mu9Zu?logo=modrinth&label=modrinth)](https://modrinth.com/mod/linkart) [![Linkart CurseForge](https://cf.way2muchnoise.eu/title/622736.svg)](https://www.curseforge.com/minecraft/mc-mods/linkart-updated) [![Linkart GitHub](https://img.shields.io/badge/%E2%80%8B-GitHub-gray?logo=github&logoColor=black&labelColor=white)](https://github.com/constellation-mc/Linkart)
 
 ### FAQ:
 
-> What's the difference between this version and the older one?
+> What's the difference between Linkart from Constellation and Linkart Refabricated?
 
-Since version 5.0.0, most of the mod has been rewritten to make the cart movement smoother. There are also additional features like chunkloading and `linkart:linkers` tag!
+This is just an up to date version of that mod, so it will be the same besides ports and bugfixes (except for the config library, which was changed to MidnightLib as Dark Matter is archived too, also giving ModMenu integration in the process)
 
 
 > How do I link minecarts together?
@@ -28,6 +26,6 @@ Just get a bunch of chains and SHIFT + RMB on your “parent” cart, and then S
 
 > Forge version?
 
-Not by me. Although 1.20 works with <img alt="Connector icon" src="https://cdn.modrinth.com/data/u58R1TMW/f9bac386eceb9fe34c517e9440f2212caeaff23d.png" width="40" height="40"> [**Connector**](https://modrinth.com/mod/connector)
+Not by me. Although 1.20 version of the original mod works with Sinytra Connector, so you may as well try.
 
 ### Requires <img alt="Fabric API icon" src="https://cdn.modrinth.com/data/P7dR8mSH/icon.png" width="40" height="40"> [Fabric API](https://modrinth.com/mod/fabric-api)
