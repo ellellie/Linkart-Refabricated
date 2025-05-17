@@ -12,5 +12,7 @@
   "linkart.midnightconfig.chunkloading":"Chunkloading",
   "linkart.midnightconfig.chunkloading.tooltip":"Allow linked carts to load chunks as they move.",
   "linkart.midnightconfig.chunkloadingRadius":"Chunkloading Radius",
-  "linkart.midnightconfig.chunkloadingRadius.tooltip":"The radius of chunks that a given cart can load."
+  "linkart.midnightconfig.chunkloadingRadius.tooltip":"The radius of chunks that a given cart can load.",
+
+  "tag.item.linkart.linkers": "Minecart Linkers"
 }
