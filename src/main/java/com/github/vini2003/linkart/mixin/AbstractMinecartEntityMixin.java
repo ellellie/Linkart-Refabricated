@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ChunkTicketType;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Uuids;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -148,7 +149,7 @@ public abstract class AbstractMinecartEntityMixin extends Entity implements Link
 
         if (LinkartConfiguration.chunkloading) {
             if (linkart$getFollower() != null && !CartUtils.approximatelyZero(this.getVelocity().length())) {
-                ((ServerWorld) this.getWorld()).getChunkManager().addTicket(ChunkTicketType.PORTAL, this.getChunkPos(), LinkartConfiguration.chunkloadingRadius, this.getBlockPos());
+                ((ServerWorld) this.getWorld()).getChunkManager().addTicket(ChunkTicketType.PORTAL, this.getChunkPos(), LinkartConfiguration.chunkloadingRadius/*? if <1.21.5 {*/, this.getBlockPos()/*?}*/);
                 LoadingCarts.getOrCreate((ServerWorld) getWorld()).addCart(cast);
             } else {
                 LoadingCarts.getOrCreate((ServerWorld) getWorld()).removeCart(cast);
@@ -163,16 +164,22 @@ public abstract class AbstractMinecartEntityMixin extends Entity implements Link
 
     @Inject(at = @At("RETURN"), method = "writeCustomDataToNbt")
     private void linkart$write(NbtCompound nbt, CallbackInfo ci) {
-        if (linkart$followingUUID != null) nbt.putUuid("LK-Following", linkart$followingUUID);
-        if (linkart$followerUUID != null) nbt.putUuid("LK-Follower", linkart$followerUUID);
-        if (linkart$itemStack != null) nbt.put("LK-ItemStack", linkart$itemStack./*? if =1.21.1 {*/encodeAllowEmpty/*?}*//*? if >=1.21.4 {*//*toNbtAllowEmpty*//*?}*/(this.getRegistryManager()));
+        if (linkart$followingUUID != null) nbt./*? if >=1.21.5 {*//*put*//*?} else {*/putUuid/*?}*/("LK-Following"/*? if >=1.21.5 {*//*, Uuids.INT_STREAM_CODEC*//*?}*/, linkart$followingUUID);
+        if (linkart$followerUUID != null) nbt./*? if >=1.21.5 {*//*put*//*?} else {*/putUuid/*?}*/("LK-Follower"/*? if >=1.21.5 {*//*, Uuids.INT_STREAM_CODEC*//*?}*/, linkart$followerUUID);
+        if (linkart$itemStack != null && !linkart$itemStack.isEmpty()) nbt.put("LK-ItemStack", linkart$itemStack./*? if =1.21.1 {*/encodeAllowEmpty/*?}*//*? if =1.21.4 {*//*toNbtAllowEmpty*//*?}*//*? if >=1.21.5 {*//*toNbt*//*?}*/(this.getRegistryManager()));
     }
 
     @Inject(at = @At("RETURN"), method = "readCustomDataFromNbt")
     private void linkart$read(NbtCompound nbt, CallbackInfo ci) {
+        /*? if >=1.21.5 {*/
+        /*linkart$followingUUID = nbt.get("LK-Following", Uuids.INT_STREAM_CODEC).orElse(null);
+        linkart$followerUUID = nbt.get("LK-Follower", Uuids.INT_STREAM_CODEC).orElse(null);
+        if (nbt.contains("LK-ItemStack")) linkart$itemStack = ItemStack.fromNbt(this.getRegistryManager(), nbt.getCompound("LK-ItemStack").orElseThrow()).orElse(null);
+        *//*?} else {*/
         if (nbt.contains("LK-Following")) linkart$followingUUID = nbt.getUuid("LK-Following");
         if (nbt.contains("LK-Follower")) linkart$followerUUID = nbt.getUuid("LK-Follower");
         if (nbt.contains("LK-ItemStack")) linkart$itemStack = ItemStack.fromNbtOrEmpty(this.getRegistryManager(), nbt.getCompound("LK-ItemStack"));
+        /*?}*/
     }
 
     @Override
