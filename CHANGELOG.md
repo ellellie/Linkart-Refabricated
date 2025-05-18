@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.1.1] - 2025-5-18
+
+### Changed
+- Added translation for the `linkart:linkers` item tag
+- Updated MidnightLib
+- Updated to 1.21.5
+
 ## [6.1.0] - 2025-1-3
 
 ### Changed
